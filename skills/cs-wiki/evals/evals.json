@@ -1,0 +1,47 @@
+{
+  "skill_name": "cs-wiki",
+  "evals": [
+    {
+      "id": 0,
+      "name": "new-concept",
+      "prompt": "프로세스랑 스레드 차이 정리해줘",
+      "expected_output": "operating-systems/process-vs-thread.md 가 OKF 포맷(type: CS Concept frontmatter)으로 생성되고, 면접 질문/함정 섹션이 채워지며, 루트 index.md와 log.md가 갱신된다. 빈 위키에서 부트스트랩 후 작성.",
+      "files": [],
+      "assertions": [
+        "okf_frontmatter: 개념 페이지에 type: CS Concept frontmatter 존재",
+        "interview_sections: '# 면접 단골 질문'과 '# 헷갈리는 점' 섹션이 채워짐",
+        "subject_dir_kebab: 주제 디렉터리 하위 kebab-case .md 로 저장",
+        "index_updated: 루트 index.md 갱신",
+        "log_updated: log.md 에 정리 기록 추가"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "update-crosslink",
+      "prompt": "3-way handshake 정리해줘",
+      "expected_output": "network/three-way-handshake.md 신규 작성. 기존 network/tcp-vs-udp.md 의 관련 개념에 역링크가 추가됨. index.md/log.md 갱신. bundle-relative 링크 사용.",
+      "files": ["seed: eval-1-update-crosslink"],
+      "assertions": [
+        "new_page_okf: three-way-handshake 페이지가 network/ 하위 OKF 포맷으로 생성",
+        "backlink_added: 기존 tcp-vs-udp.md 의 '# 관련 개념'에 역링크 추가",
+        "bundle_relative_links: 교차링크가 /network/... 형식",
+        "existing_preserved: 기존 tcp-vs-udp.md 본문 보존",
+        "index_log_updated: index.md/log.md 갱신"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "lint-report",
+      "prompt": "위키 점검해줘",
+      "expected_output": "모순(tcp-vs-udp 와 udp 페이지), 고아 페이지, 언급됐지만 없는 개념(quic)을 찾아 보고만 한다. 자동 수정하지 않고 사용자 승인을 기다린다.",
+      "files": ["seed: eval-2-lint"],
+      "assertions": [
+        "contradiction_found: UDP 순서보장 모순 탐지",
+        "orphan_found: 고아 페이지(b-tree-index) 탐지",
+        "missing_concept_found: 언급됐으나 없는 개념(quic) 탐지",
+        "no_autofix: 위키 파일 미수정(보고만)",
+        "report_produced: 분류된 점검 보고서 산출"
+      ]
+    }
+  ]
+}

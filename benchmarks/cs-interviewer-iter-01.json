@@ -1,0 +1,12 @@
+{
+  "project": "cs-interview",
+  "skill": "cs-interviewer",
+  "iteration": "iter-01",
+  "date": "2026-06-18",
+  "method": "정성 검증(qualitative) — JPA 5개념 실전 모의면접. A/B 수치 벤치는 미측정.",
+  "result": {
+    "pass_rate": null,
+    "verified": ["키워드 기반 꼬리질문", "위키 기준 채점", "기록 분리", "약점 추적", "답변 대필 버그 수정 확인"]
+  },
+  "next": "cs-wiki 처럼 eval 스위트 + A/B pass rate 도입 — 특히 '대필 금지' 같은 interactive-turn 동작을 assert 로 회귀 방지."
+}

@@ -1,0 +1,18 @@
+{
+  "project": "cs-interview",
+  "skill": "cs-wiki",
+  "iteration": "iter-01",
+  "date": "2026-06-17",
+  "method": "A/B eval vs baseline Sonnet over the eval suite (skills/cs-wiki/evals/evals.json: new-concept / update-crosslink / lint-report)",
+  "result": {
+    "pass_rate": 1.0,
+    "passed": 15,
+    "total": 15,
+    "baseline_pass_rate": 0.53,
+    "delta": 0.47,
+    "token_cost_ratio": 1.46
+  },
+  "analysis": "개선의 대부분은 구조 + 규율(그린필드 정리, lint no-autofix)에서 발생. 내용 품질 자체는 baseline과 동률.",
+  "next": "eval-1(시드 위키)의 변별력이 약함 — 구조를 추론해야 하는 더 어려운 유지보수 케이스로 iter-02에서 보강.",
+  "full_records": "~/.claude/skill-benchmarks/cs-wiki/"
+}
