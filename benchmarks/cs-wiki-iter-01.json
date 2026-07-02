@@ -14,5 +14,5 @@
   },
   "analysis": "개선의 대부분은 구조 + 규율(그린필드 정리, lint no-autofix)에서 발생. 내용 품질 자체는 baseline과 동률.",
   "next": "eval-1(시드 위키)의 변별력이 약함 — 구조를 추론해야 하는 더 어려운 유지보수 케이스로 iter-02에서 보강.",
-  "full_records": "~/.claude/skill-benchmarks/cs-wiki/"
+  "full_records": "./cs-wiki/"
 }
