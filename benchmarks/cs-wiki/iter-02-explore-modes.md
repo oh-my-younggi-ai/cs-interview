@@ -13,17 +13,25 @@
 - 추천은 **위키에 아직 없는 갭**에서 (중복 방지 + 학습 격차 메우기).
 - ingest 전 항상 사용자 승인, 대화 중 **답변 대필 금지**.
 
-## Headline result — 측정 대기 (pending)
+## 측정 — 지표 델타 (pending)
 
-> **아직 A/B 수치 미측정.** 신규 eval 2건은 **대화형(interactive)** 이라 iter-01의 단발
-> harness로는 부분만 측정된다: diff·추천 로직(어느 개념을 후보로 내는가)은 단발로 검증 가능하지만,
-> 다중 턴 대화(discuss)는 **스크립트된 사용자 턴**이 있어야 재현된다. harness 실행 시
-> `with_skill(iter-02)` vs `iter-01` 로 측정 예정.
+채점을 **결정론적 3층**으로 재설계했다 ([BENCHMARKING.md](../../../skills/BENCHMARKING.md),
+[METRICS.md](./METRICS.md)): 회귀 바닥(pass/fail 가드) + 진행 지표(연속) + 확장 eval.
+단일 점수 대신 **지표 델타**를 남긴다. 아래 값은 harness 실행 시 채워진다.
 
-| Config | Pass rate | 비고 |
-|--------|-----------|------|
-| iter-02 (new) | — | 측정 대기 |
-| iter-01 (prev) | — | 기준선 |
+| 지표 | iter-01 | iter-02 | Δ |
+|---|---|---|---|
+| 회귀 바닥 (floor all-green) | — | — | 목표 green |
+| lint_recall | — | — | |
+| crosslink_density (/page) | — | — | ↑ |
+| backlink_completeness | — | — | ↑ |
+| orphan_ratio | — | — | ↓ |
+| gap_recommend_precision | (신규) | — | ↑ |
+| explore_missing_precision | (신규) | — | ↑ |
+| token_cost | 1.46× | — | ↓ |
+
+> 신규 대화형 eval(explore)은 **첫 응답 1개만** 관측해 결정론적으로 채점(제안 집합 vs 위키개념집합,
+> 새 파일 미생성, 대필 없음) → 전체 대화 재현·judge 불필요.
 
 ## 새 eval — 변별 목표
 

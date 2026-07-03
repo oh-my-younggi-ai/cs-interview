@@ -24,11 +24,12 @@
 - **iter-01:** `with_skill` vs **no-skill** — 스킬의 절대 가치와 첫 수치 확립.
 - **iter-02+:** 새 버전 vs **이전 버전** (회귀 가드). 주기적으로 no-skill 재기준선.
 
-## Assertions (정량 측정 항목)
+## 채점 (v2 — 결정론적 3층)
 
-- 구조: `okf_frontmatter`, `subject_dir_kebab`, `index_updated`, `log_updated`, `bundle_relative_links`
-- 면접 활용: `interview_sections`
-- 유지보수: `backlink_added`, `existing_preserved`, `new_page_okf`
-- lint: `contradiction_found`, `orphan_found`, `missing_concept_found`, `no_autofix`, `report_produced`
+iter-02부터 LLM judge 없이 **스크립트 grader**로 채점한다. 정의·측정식: [METRICS.md](./METRICS.md).
 
-비변별(둘 다 통과) 어설션은 가드레일로 유지하되 가치 측정에서는 제외해 해석한다.
+- **① 회귀 바닥 (floor)** — pass/fail 가드. `file_exists`·`frontmatter_has`·`headers_present`·`index_links_page`·`log_grew`·`links_bundle_relative`·`backlink_present`·`content_preserved`·`no_file_changes`·`no_new_files`·`no_fabricated_user_turn` 등. 항상 green 목표.
+- **② 진행 지표 (metrics)** — 연속값. `lint_recall`·`crosslink_density`·`backlink_completeness`·`orphan_ratio`·`gap_recommend_precision`·`explore_missing_precision`·`token_cost`.
+- **③ 확장 eval** — 시드를 iter마다 어렵게 → 지표 헤드룸 유지.
+
+내용 품질은 객관 측정 불가 + 비변별이라 **점수에서 제외**한다. (구버전 문자열 어설션 → v2 결정론 검사로 이관)

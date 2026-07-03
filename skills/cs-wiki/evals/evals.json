@@ -1,75 +1,69 @@
 {
   "skill_name": "cs-wiki",
-  "evals": [
+  "schema": "v2-deterministic",
+  "notes": "결정론적 채점. floor=pass/fail 회귀 가드(항상 green 목표), metrics=연속 진행 지표. 측정식은 benchmarks/cs-wiki/METRICS.md. 내용 품질은 점수에서 제외. 채점은 LLM judge가 아니라 스크립트 grader.",
+  "cases": [
     {
-      "id": 0,
-      "name": "new-concept",
+      "id": "new-concept",
       "prompt": "프로세스랑 스레드 차이 정리해줘",
-      "expected_output": "operating-systems/process-vs-thread.md 가 OKF 포맷(type: CS Concept frontmatter)으로 생성되고, 면접 질문/함정 섹션이 채워지며, 루트 index.md와 log.md가 갱신된다. 빈 위키에서 부트스트랩 후 작성.",
-      "files": [],
-      "assertions": [
-        "okf_frontmatter: 개념 페이지에 type: CS Concept frontmatter 존재",
-        "interview_sections: '# 면접 단골 질문'과 '# 헷갈리는 점' 섹션이 채워짐",
-        "subject_dir_kebab: 주제 디렉터리 하위 kebab-case .md 로 저장",
-        "index_updated: 루트 index.md 갱신",
-        "log_updated: log.md 에 정리 기록 추가"
-      ]
+      "fixture": "empty",
+      "floor": [
+        {"id": "file_created", "check": "file_exists", "path": "operating-systems/process-vs-thread.md"},
+        {"id": "frontmatter_valid", "check": "frontmatter_has", "type_equals": "CS Concept"},
+        {"id": "sections_present", "check": "headers_present", "headers": ["# 한 줄 정의", "# 핵심 개념", "# 면접 단골 질문", "# 관련 개념"]},
+        {"id": "index_updated", "check": "index_links_page", "page": "operating-systems/process-vs-thread"},
+        {"id": "log_appended", "check": "log_grew"}
+      ],
+      "metrics": ["crosslink_density", "backlink_completeness", "orphan_ratio"]
     },
     {
-      "id": 1,
-      "name": "update-crosslink",
+      "id": "update-crosslink",
       "prompt": "3-way handshake 정리해줘",
-      "expected_output": "network/three-way-handshake.md 신규 작성. 기존 network/tcp-vs-udp.md 의 관련 개념에 역링크가 추가됨. index.md/log.md 갱신. bundle-relative 링크 사용.",
-      "files": ["seed: eval-1-update-crosslink"],
-      "assertions": [
-        "new_page_okf: three-way-handshake 페이지가 network/ 하위 OKF 포맷으로 생성",
-        "backlink_added: 기존 tcp-vs-udp.md 의 '# 관련 개념'에 역링크 추가",
-        "bundle_relative_links: 교차링크가 /network/... 형식",
-        "existing_preserved: 기존 tcp-vs-udp.md 본문 보존",
-        "index_log_updated: index.md/log.md 갱신"
-      ]
+      "fixture": "eval-1-update-crosslink",
+      "floor": [
+        {"id": "file_created", "check": "file_exists", "path": "network/three-way-handshake.md"},
+        {"id": "link_format", "check": "links_bundle_relative"},
+        {"id": "backlink_added", "check": "backlink_present", "from": "network/tcp-vs-udp", "to": "network/three-way-handshake"},
+        {"id": "existing_preserved", "check": "content_preserved", "path": "network/tcp-vs-udp.md"},
+        {"id": "index_updated", "check": "index_links_page", "page": "network/three-way-handshake"}
+      ],
+      "metrics": ["crosslink_density", "backlink_completeness"]
     },
     {
-      "id": 2,
-      "name": "lint-report",
+      "id": "lint-report",
       "prompt": "위키 점검해줘",
-      "expected_output": "모순(tcp-vs-udp 와 udp 페이지), 고아 페이지, 언급됐지만 없는 개념(quic)을 찾아 보고만 한다. 자동 수정하지 않고 사용자 승인을 기다린다.",
-      "files": ["seed: eval-2-lint"],
-      "assertions": [
-        "contradiction_found: UDP 순서보장 모순 탐지",
-        "orphan_found: 고아 페이지(b-tree-index) 탐지",
-        "missing_concept_found: 언급됐으나 없는 개념(quic) 탐지",
-        "no_autofix: 위키 파일 미수정(보고만)",
-        "report_produced: 분류된 점검 보고서 산출"
-      ]
+      "fixture": "eval-2-lint",
+      "answer_key": {
+        "contradiction": ["network/tcp-vs-udp", "network/udp"],
+        "orphan": ["database/b-tree-index"],
+        "missing": ["network/quic"]
+      },
+      "floor": [
+        {"id": "no_autofix", "check": "no_file_changes"}
+      ],
+      "metrics": ["lint_recall"]
     },
     {
-      "id": 3,
-      "name": "recommend-gaps",
+      "id": "recommend-gaps",
       "prompt": "면접 대비 뭐 정리하면 좋을지 모르겠어, 추천해줘",
-      "expected_output": "루트 index와 대조해, 위키에 아직 없는 고빈출 CS 개념 2~5개를 각각 한 줄 이유와 함께 추천한다. 이미 위키에 있는 개념은 추천하지 않는다. 승인 없이 위키 파일을 만들지 않는다.",
-      "files": ["seed: eval-1-update-crosslink"],
-      "assertions": [
-        "recommends_absent_only: 추천이 시드 위키에 없는 개념만 포함 (기존 개념 제외)",
-        "reason_per_item: 각 추천에 왜 중요한지 한 줄 이유",
-        "count_2_to_5: 2~5개 추천",
-        "no_write_without_approval: 승인 전 위키 파일 미생성",
-        "uses_wiki_index: 루트 index.md를 근거로 갭 판단"
-      ]
+      "fixture": "eval-1-update-crosslink",
+      "floor": [
+        {"id": "count_2_5", "check": "recommend_count", "min": 2, "max": 5},
+        {"id": "reason_each", "check": "each_item_has_reason"},
+        {"id": "no_write", "check": "no_new_files"}
+      ],
+      "metrics": ["gap_recommend_precision"]
     },
     {
-      "id": 4,
-      "name": "explore-missing-only",
-      "prompt": "TCP/UDP랑 QUIC 얘기하며 정리하자",
-      "expected_output": "대화로 개념을 짚고 나온 키워드를 위키 index와 대조한다. 시드에 이미 있는 tcp-vs-udp는 정리 후보에서 제외하고, 없는 quic만 정리 후보로 제안한 뒤 승인을 기다린다. 한 번에 한 질문, 답변 대필 금지.",
-      "files": ["seed: eval-1-update-crosslink"],
-      "assertions": [
-        "keywords_extracted: 대화에서 CS 개념 키워드 추출",
-        "diffed_against_wiki: 키워드를 위키 index와 대조",
-        "proposes_missing_only: 위키에 없는 개념(quic)만 정리 후보로 제안, 있는 것(tcp-vs-udp)은 제외",
-        "awaits_approval: ingest 전 사용자 승인 대기",
-        "no_answer_fabrication: 사용자 답변을 대신 만들지 않음"
-      ]
+      "id": "explore-missing-only",
+      "scripted_turns": ["TCP/UDP랑 QUIC 얘기하며 정리하자"],
+      "grade_turn": 1,
+      "fixture": "eval-1-update-crosslink",
+      "floor": [
+        {"id": "no_write", "check": "no_new_files"},
+        {"id": "no_fabricated_turn", "check": "no_fabricated_user_turn"}
+      ],
+      "metrics": ["explore_missing_precision"]
     }
   ]
 }

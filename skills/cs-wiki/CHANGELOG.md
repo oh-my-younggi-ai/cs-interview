@@ -7,6 +7,7 @@ Full benchmark records: `../../benchmarks/cs-wiki/`
 - 신규 `step-explore.md` + `step-01-route` 분기 + workflow INVARIANT(대화 대필 금지 / 위키에 없는 것만 정리 / 추천은 갭에서)
 - 대화 키워드 → 위키 index 대조 → **없는 개념만** 승인 후 ingest
 - evals 3→5 (`recommend-gaps`, `explore-missing-only` 추가). **A/B 수치는 측정 대기(harness)**
+- **벤치 채점 재설계:** 결정론적 3층(회귀 바닥 + 진행 지표 + 확장 eval), `evals`→v2 스키마, `benchmarks/cs-wiki/METRICS.md`(측정식) 추가. LLM judge 제거
 
 ## iter-01 · 2026-06-17 — initial draft
 
