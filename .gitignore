@@ -1,0 +1,8 @@
+# 개인 데이터 — 공개하지 않음 (면접 기록·오답노트·점수)
+records/
+
+# 에디터(Obsidian) 설정
+.obsidian/
+
+# eval 워크스페이스 (원시 산출물)
+*-workspace/

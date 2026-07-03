@@ -1,6 +1,6 @@
 ---
-wiki_root: '~/Desktop/code/claud/cs-wiki'
-records_root: '~/Desktop/code/claud/cs-interview-records'
+wiki_root: '~/Desktop/code/oh-my-younggi-ai/cs-interview/knowledge'
+records_root: '~/Desktop/code/oh-my-younggi-ai/cs-interview/records'
 records_format_file: './records-format.md'
 communication_language: '한국어'
 default_session_size: 5
@@ -19,9 +19,9 @@ max_followups_per_concept: 2
 
 ## 경로 규칙
 
-- `{wiki_root}` (`~/Desktop/code/claud/cs-wiki`) — 지식 위키. `cs-wiki` 스킬 소유.
+- `{wiki_root}` (`~/Desktop/code/oh-my-younggi-ai/cs-interview/knowledge`) — 지식 위키. `cs-wiki` 스킬 소유.
   **이 스킬은 위키를 읽기만 한다. 절대 수정하지 않는다** (정답 기준 오염 방지).
-- `{records_root}` (`~/Desktop/code/claud/cs-interview-records`) — 면접 기록 저장소.
+- `{records_root}` (`~/Desktop/code/oh-my-younggi-ai/cs-interview/records`) — 면접 기록 저장소.
   이 스킬이 소유하고 여기에만 쓴다.
 - `./...` — 이 스킬 디렉터리 기준 상대 경로.
 

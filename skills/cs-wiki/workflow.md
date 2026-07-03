@@ -1,6 +1,6 @@
 ---
-wiki_root: '~/Desktop/code/claud/cs-wiki'
-records_root: '~/Desktop/code/claud/cs-interview-records'
+wiki_root: '~/Desktop/code/oh-my-younggi-ai/cs-interview/knowledge'
+records_root: '~/Desktop/code/oh-my-younggi-ai/cs-interview/records'
 conventions_file: './conventions.md'
 concept_template: './concept-template.md'
 communication_language: '한국어'
@@ -20,8 +20,8 @@ communication_language: '한국어'
 
 ## 경로 규칙
 
-- `{wiki_root}` (`~/Desktop/code/claud/cs-wiki`) — 지식 위키 번들 루트. 이 스킬이 소유한다.
-- `{records_root}` (`~/Desktop/code/claud/cs-interview-records`) — 면접 기록 저장소.
+- `{wiki_root}` (`~/Desktop/code/oh-my-younggi-ai/cs-interview/knowledge`) — 지식 위키 번들 루트. 이 스킬이 소유한다.
+- `{records_root}` (`~/Desktop/code/oh-my-younggi-ai/cs-interview/records`) — 면접 기록 저장소.
   `cs-interviewer`가 소유한다. **이 스킬은 여기에 절대 쓰지 않는다.**
 - `./...` — 이 스킬 디렉터리 기준 상대 경로 (`conventions.md`, 템플릿 등).
 
