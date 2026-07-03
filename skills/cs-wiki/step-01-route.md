@@ -22,8 +22,12 @@
 
 `{request}`(스킬을 발동시킨 사용자 요청)를 읽고 `{operation}`을 정한다:
 
-- **ingest (정리)** — 개념을 위키에 작성/추가/갱신하려는 요청.
+- **ingest (직접 정리)** — 대상 개념이 **명확한** 정리 요청.
   예: "TCP/UDP 정리해줘", "프로세스 스레드 차이 위키에 추가", "이 글 요약해서 넣어줘".
+- **explore·discuss (대화 탐색)** — 주제/방향은 있으나 **대화하며 함께 정리**하려는 요청.
+  예: "N+1 관련해서 얘기하며 정리하자", "영속성 컨텍스트 헷갈리는데 같이 짚어줘".
+- **explore·recommend (추천)** — **무엇을 정리/공부할지 모를 때.**
+  예: "뭐 공부하지?", "뭐 정리하면 좋을까?", "면접 대비 뭐부터 볼까?".
 - **query (질의)** — 위키에 정리된 내용을 찾아보거나 종합해 달라는 요청.
   예: "인덱스 관련 정리된 거 보여줘", "네트워크 쪽 뭐 정리돼 있어?".
 - **lint (점검)** — 위키 건강검진 요청.
@@ -35,6 +39,8 @@
 
 ### 3. 분기
 
-- `ingest` → **EARLY EXIT** → `./step-ingest.md`
+- `ingest`(직접) → **EARLY EXIT** → `./step-ingest.md`
+- `explore·discuss` → `{explore_mode}=discuss` 설정 후 **EARLY EXIT** → `./step-explore.md`
+- `explore·recommend` → `{explore_mode}=recommend` 설정 후 **EARLY EXIT** → `./step-explore.md`
 - `query` → **EARLY EXIT** → `./step-query.md`
 - `lint` → **EARLY EXIT** → `./step-lint.md`

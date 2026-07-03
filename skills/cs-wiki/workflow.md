@@ -36,6 +36,9 @@ communication_language: '한국어'
 - 페이지를 만들거나 고치면 반드시 관련 `index.md`와 `log.md`를 갱신한다.
 - 사용자는 위키를 직접 쓰지 않는다. 작성·교차링크·index/log 갱신은 전부 이 스킬이 한다.
 - 점검(lint)에서 발견한 문제는 자동 수정하지 않고 사용자 승인 후 고친다.
+- **대화 탐색/추천(explore) 시 한 번에 한 질문/제안하고, 사용자 답변을 대신 만들지 않는다.** 실제 입력이 온 뒤에만 진행한다.
+- **대화에서 나온 개념은 위키 `index.md`와 대조해 "없는 것만" 정리 대상으로 삼는다.** 이미 있는 개념은 중복 정리하지 않는다.
+- **추천(recommend)은 위키에 아직 없는 개념 중에서** 한다 (학습 격차 메우기).
 
 
 ## STEP PROCESSING RULES
@@ -50,7 +53,9 @@ communication_language: '한국어'
 ## 세션 상태 변수 (런타임에 설정)
 
 - `{request}` — 스킬을 발동시킨 사용자 요청 원문
-- `{operation}` — 분류된 작업: `ingest` | `query` | `lint`
+- `{operation}` — 분류된 작업: `ingest` | `explore` | `query` | `lint`
+- `{explore_mode}` — explore 시 세부 모드: `discuss`(대화) | `recommend`(추천)
+- `{surfaced_concepts}` — 대화에서 추출한 개념 키워드 (위키와 대조해 없는 것만 정리 대상)
 - `{conventions}` — `{conventions_file}`에서 로드한 OKF 스키마/규칙 전문
 - `{template}` — `{concept_template}`에서 로드한 개념 페이지 템플릿
 - `{target_concept}` — 정리/질의 대상 개념 (해당 시)

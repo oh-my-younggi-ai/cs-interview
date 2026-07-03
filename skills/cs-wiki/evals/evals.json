@@ -42,6 +42,34 @@
         "no_autofix: 위키 파일 미수정(보고만)",
         "report_produced: 분류된 점검 보고서 산출"
       ]
+    },
+    {
+      "id": 3,
+      "name": "recommend-gaps",
+      "prompt": "면접 대비 뭐 정리하면 좋을지 모르겠어, 추천해줘",
+      "expected_output": "루트 index와 대조해, 위키에 아직 없는 고빈출 CS 개념 2~5개를 각각 한 줄 이유와 함께 추천한다. 이미 위키에 있는 개념은 추천하지 않는다. 승인 없이 위키 파일을 만들지 않는다.",
+      "files": ["seed: eval-1-update-crosslink"],
+      "assertions": [
+        "recommends_absent_only: 추천이 시드 위키에 없는 개념만 포함 (기존 개념 제외)",
+        "reason_per_item: 각 추천에 왜 중요한지 한 줄 이유",
+        "count_2_to_5: 2~5개 추천",
+        "no_write_without_approval: 승인 전 위키 파일 미생성",
+        "uses_wiki_index: 루트 index.md를 근거로 갭 판단"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "explore-missing-only",
+      "prompt": "TCP/UDP랑 QUIC 얘기하며 정리하자",
+      "expected_output": "대화로 개념을 짚고 나온 키워드를 위키 index와 대조한다. 시드에 이미 있는 tcp-vs-udp는 정리 후보에서 제외하고, 없는 quic만 정리 후보로 제안한 뒤 승인을 기다린다. 한 번에 한 질문, 답변 대필 금지.",
+      "files": ["seed: eval-1-update-crosslink"],
+      "assertions": [
+        "keywords_extracted: 대화에서 CS 개념 키워드 추출",
+        "diffed_against_wiki: 키워드를 위키 index와 대조",
+        "proposes_missing_only: 위키에 없는 개념(quic)만 정리 후보로 제안, 있는 것(tcp-vs-udp)은 제외",
+        "awaits_approval: ingest 전 사용자 승인 대기",
+        "no_answer_fabrication: 사용자 답변을 대신 만들지 않음"
+      ]
     }
   ]
 }

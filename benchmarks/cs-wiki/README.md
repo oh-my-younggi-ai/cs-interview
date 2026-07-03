@@ -5,16 +5,19 @@
 | Iter | Date | Change | Comparison | Pass rate (skill) | Δ vs baseline | Record |
 |------|------|--------|------------|-------------------|---------------|--------|
 | 01 | 2026-06-17 | initial draft | vs no-skill | 1.00 (15/15) | +0.47 (base 0.53) | [iter-01](./iter-01-initial.md) |
+| 02 | 2026-07-03 | explore modes (대화 탐색·추천) | vs iter-01 | — (측정 대기) | — | [iter-02](./iter-02-explore-modes.md) |
 
 > **iter-01 요약:** +0.47은 거의 전부 *구조적/규율적* 이득(OKF frontmatter, index/log 유지, lint no-autofix). *내용* 품질은 baseline Sonnet과 동률. eval-1(시드 위키)은 변별력이 약함 — iter-02에서 evals를 강화해야 함. Token cost ≈ 1.46×.
 
 ## Eval set
 
-3 cases — canonically `skills/cs-wiki/evals/evals.json`:
+5 cases — canonically `skills/cs-wiki/evals/evals.json`:
 
 1. **new-concept** — 빈 위키에 "프로세스/스레드" 정리. 그린필드 부트스트랩.
 2. **update-crosslink** — 기존 TCP 페이지가 있는 위키에 "3-way handshake" 추가 + 역링크.
 3. **lint-report** — 모순/고아/누락이 심긴 위키 점검 (보고만, 자동수정 금지).
+4. **recommend-gaps** *(iter-02)* — "뭐 정리하지?"에 위키에 **없는** 개념만 추천.
+5. **explore-missing-only** *(iter-02)* — 대화 키워드를 위키와 대조해 **없는 것만** 정리 제안 (대화형, 부분 측정).
 
 ## Comparison strategy
 

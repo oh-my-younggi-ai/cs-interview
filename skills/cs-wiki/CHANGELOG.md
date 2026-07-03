@@ -2,6 +2,12 @@
 
 Full benchmark records: `../../benchmarks/cs-wiki/`
 
+## iter-02 · 2026-07-03 — 대화 탐색 · 추천 모드
+- ingest 진입을 3모드로 확장: **직접** / **대화 탐색(discuss)** / **추천(recommend)**
+- 신규 `step-explore.md` + `step-01-route` 분기 + workflow INVARIANT(대화 대필 금지 / 위키에 없는 것만 정리 / 추천은 갭에서)
+- 대화 키워드 → 위키 index 대조 → **없는 개념만** 승인 후 ingest
+- evals 3→5 (`recommend-gaps`, `explore-missing-only` 추가). **A/B 수치는 측정 대기(harness)**
+
 ## iter-01 · 2026-06-17 — initial draft
 
 **Pass rate:** 1.00 (15/15) vs baseline 0.53 · **Δ** +0.47 · **Token cost** ≈ 1.46×
