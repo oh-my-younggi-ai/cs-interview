@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-02 — 프로젝트 구조 · 경로 (유지보수)
+
+oh-my-younggi-ai Organization 이관에 따른 구조 정비. **스킬 동작 로직 변경은 없음.**
+
+- **지식 베이스 공개** — `knowledge/`(23p) 를 repo 에 포함. 면접관이 낼 공유 지식으로 공개.
+- **단일 소스화** — `wiki_root` → `cs-interview/knowledge`, `records_root` → `cs-interview/records` 로 repoint. 위키 편집 = repo 편집(push 하면 공개본 갱신).
+- **개인 데이터 격리** — 면접 기록을 `records/` 로 이동 + `.gitignore`(`records/`·`.obsidian/`·`*-workspace/`). 공개 안 됨.
+- **경로 정리** — CHANGELOG 의 벤치 기록 경로를 repo 내 `benchmarks/` 로 수정.
+- **README** — 동작·결과물·사용법·업데이트 정리 루틴 문서화.
+
+---
+
 ## cs-wiki
 
 ### iter-01 · 2026-06-17 — initial draft
