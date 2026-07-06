@@ -5,7 +5,7 @@
 | Iter | Date | Change | Comparison | Pass rate (skill) | Δ vs baseline | Record |
 |------|------|--------|------------|-------------------|---------------|--------|
 | 01 | 2026-06-17 | initial draft | vs no-skill | 1.00 (15/15) | +0.47 (base 0.53) | [iter-01](./iter-01-initial.md) |
-| 02 | 2026-07-03 | explore modes (대화 탐색·추천) | vs iter-01 | — (측정 대기) | — | [iter-02](./iter-02-explore-modes.md) |
+| 02 | 2026-07-03 | explore modes (대화 탐색·추천) | v2 결정론 채점 | floor 16/16 green · recall 1.0 · 추천정밀도 1.0 | (v2 전환 — 소급 비교 불가) | [iter-02](./iter-02-explore-modes.md) |
 
 > **iter-01 요약:** +0.47은 거의 전부 *구조적/규율적* 이득(OKF frontmatter, index/log 유지, lint no-autofix). *내용* 품질은 baseline Sonnet과 동률. eval-1(시드 위키)은 변별력이 약함 — iter-02에서 evals를 강화해야 함. Token cost ≈ 1.46×.
 

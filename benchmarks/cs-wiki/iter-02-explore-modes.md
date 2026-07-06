@@ -13,25 +13,47 @@
 - 추천은 **위키에 아직 없는 갭**에서 (중복 방지 + 학습 격차 메우기).
 - ingest 전 항상 사용자 승인, 대화 중 **답변 대필 금지**.
 
-## 측정 — 지표 델타 (pending)
+## 측정 결과 — 2026-07-06 harness 실행 (5 cases × 1 run, 병렬 서브에이전트)
 
-채점을 **결정론적 3층**으로 재설계했다 ([BENCHMARKING.md](../../../skills/BENCHMARKING.md),
-[METRICS.md](./METRICS.md)): 회귀 바닥(pass/fail 가드) + 진행 지표(연속) + 확장 eval.
-단일 점수 대신 **지표 델타**를 남긴다. 아래 값은 harness 실행 시 채워진다.
+채점: **결정론적 3층** ([BENCHMARKING.md](../../../skills/BENCHMARKING.md), [METRICS.md](./METRICS.md)) —
+`grader.mjs`가 스크래치 위키 상태 + 첫 응답 텍스트를 스크립트로 채점. LLM judge 0.
 
-| 지표 | iter-01 | iter-02 | Δ |
+### 회귀 바닥 (floor) — **16/16 all green** ✅
+
+| 케이스 | floor | 비고 |
+|---|---|---|
+| new-concept | 5/5 | 페이지·frontmatter·4섹션·index·log |
+| update-crosslink | 6/6 | 역링크·기존 본문 17/18 라인 보존·번들 링크 |
+| lint-report | 1/1 | 자동수정 없음 (승인 대기로 종료) |
+| recommend-gaps | 2/2 | 5개 추천·승인 전 미기록 |
+| explore-missing | 2/2 | 미기록·**대필 없음** (질문 후 즉시 종료) |
+
+### 진행 지표
+
+| 지표 | iter-01 | iter-02 | 해석 |
 |---|---|---|---|
-| 회귀 바닥 (floor all-green) | — | — | 목표 green |
-| lint_recall | — | — | |
-| crosslink_density (/page) | — | — | ↑ |
-| backlink_completeness | — | — | ↑ |
-| orphan_ratio | — | — | ↓ |
-| gap_recommend_precision | (신규) | — | ↑ |
-| explore_missing_precision | (신규) | — | ↑ |
-| token_cost | 1.46× | — | ↓ |
+| lint_recall | 소급 불가¹ | **1.00** (3/3) | 심어둔 모순·고아·누락 전부 탐지 |
+| gap_recommend_precision | (모드 없음) | **1.00** | 추천 5개 전부 위키에 없는 진짜 갭 |
+| explore_missing_precision | (모드 없음) | 0.50 ⚠️ | **측정 아티팩트** — 아래 분석 |
+| backlink_completeness (update-crosslink) | 소급 불가¹ | 1.00 | 신규↔기존 양방향 완성 |
+| 실행 토큰 (참고) | — | 25.9k~35.9k/case (평균 29.9k) | baseline 미실행 → ratio 없음 |
 
-> 신규 대화형 eval(explore)은 **첫 응답 1개만** 관측해 결정론적으로 채점(제안 집합 vs 위키개념집합,
-> 새 파일 미생성, 대필 없음) → 전체 대화 재현·judge 불필요.
+¹ iter-01은 v1 문자열 채점으로 측정돼 v2 지표로 소급 비교 불가. ingest/lint step 텍스트는
+iter-01과 동일하므로 해당 케이스의 스킬 행동은 동등하다.
+
+### ⚠️ explore 0.50 분석 — 스킬이 아니라 측정기의 한계
+
+응답 행동은 설계 그대로였다: "TCP vs UDP는 **이미 있으니 중복 정리 제외**, QUIC만 후보" +
+한 질문 후 턴 종료. 그러나 grader의 불릿 추출이 **"제외 안내" 불릿(TCP vs UDP)까지 제안으로
+집계**해 2개 중 1개가 기존 개념 매칭 → 0.50. 수치를 후처리로 1.0으로 "고치지" 않고 그대로
+기록한다 — eval 결함도 벤치의 산출물이다.
+
+## Decision → next iteration
+
+1. **제안 목록 기계-파싱 계약**: 스킬이 정리 후보를 고정 마커(예: `## 정리 후보`) 아래 불릿으로만
+   내도록 step-explore에 명시 + grader는 그 블록만 추출 → explore 정밀도 측정 정상화. (iter-03)
+2. baseline(no-skill) 재실행으로 token_cost ratio 복원 — 필요성 낮으면 보류.
+3. lint 시드 난이도 상향(미묘한 모순)으로 recall 헤드룸 확보 — 현재 3/3 포화.
 
 ## 새 eval — 변별 목표
 
