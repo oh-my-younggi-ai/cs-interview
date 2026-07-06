@@ -1,17 +1,18 @@
 {
   "skill_name": "cs-wiki",
   "schema": "v2-deterministic",
-  "notes": "결정론적 채점. floor=pass/fail 회귀 가드(항상 green 목표), metrics=연속 진행 지표. 측정식은 benchmarks/cs-wiki/METRICS.md. 내용 품질은 점수에서 제외. 채점은 LLM judge가 아니라 스크립트 grader.",
+  "grader": "../../benchmarks/grader.mjs",
+  "notes": "결정론적 채점(LLM judge 없음). floor=pass/fail 회귀 가드, metrics=연속 진행 지표. 측정식은 benchmarks/cs-wiki/METRICS.md. crosslink_density는 게임 가능해 참고치(비점수). token_cost는 harness가 --tokens로 주입. 내용 품질은 점수 제외.",
   "cases": [
     {
       "id": "new-concept",
       "prompt": "프로세스랑 스레드 차이 정리해줘",
       "fixture": "empty",
       "floor": [
-        {"id": "file_created", "check": "file_exists", "path": "operating-systems/process-vs-thread.md"},
+        {"id": "page_created", "check": "page_created", "slug": "process-vs-thread", "aliases": ["process-thread", "process-and-thread"]},
         {"id": "frontmatter_valid", "check": "frontmatter_has", "type_equals": "CS Concept"},
         {"id": "sections_present", "check": "headers_present", "headers": ["# 한 줄 정의", "# 핵심 개념", "# 면접 단골 질문", "# 관련 개념"]},
-        {"id": "index_updated", "check": "index_links_page", "page": "operating-systems/process-vs-thread"},
+        {"id": "index_updated", "check": "index_links_page"},
         {"id": "log_appended", "check": "log_grew"}
       ],
       "metrics": ["crosslink_density", "backlink_completeness", "orphan_ratio"]
@@ -19,20 +20,21 @@
     {
       "id": "update-crosslink",
       "prompt": "3-way handshake 정리해줘",
-      "fixture": "eval-1-update-crosslink",
+      "fixture": "fixtures/eval-1-update-crosslink",
       "floor": [
-        {"id": "file_created", "check": "file_exists", "path": "network/three-way-handshake.md"},
+        {"id": "page_created", "check": "page_created", "slug": "three-way-handshake", "aliases": ["3-way-handshake", "tcp-handshake"]},
         {"id": "link_format", "check": "links_bundle_relative"},
         {"id": "backlink_added", "check": "backlink_present", "from": "network/tcp-vs-udp", "to": "network/three-way-handshake"},
         {"id": "existing_preserved", "check": "content_preserved", "path": "network/tcp-vs-udp.md"},
-        {"id": "index_updated", "check": "index_links_page", "page": "network/three-way-handshake"}
+        {"id": "index_updated", "check": "index_links_page"},
+        {"id": "log_appended", "check": "log_grew"}
       ],
       "metrics": ["crosslink_density", "backlink_completeness"]
     },
     {
       "id": "lint-report",
       "prompt": "위키 점검해줘",
-      "fixture": "eval-2-lint",
+      "fixture": "fixtures/eval-2-lint",
       "answer_key": {
         "contradiction": ["network/tcp-vs-udp", "network/udp"],
         "orphan": ["database/b-tree-index"],
@@ -46,10 +48,9 @@
     {
       "id": "recommend-gaps",
       "prompt": "면접 대비 뭐 정리하면 좋을지 모르겠어, 추천해줘",
-      "fixture": "eval-1-update-crosslink",
+      "fixture": "fixtures/eval-1-update-crosslink",
       "floor": [
         {"id": "count_2_5", "check": "recommend_count", "min": 2, "max": 5},
-        {"id": "reason_each", "check": "each_item_has_reason"},
         {"id": "no_write", "check": "no_new_files"}
       ],
       "metrics": ["gap_recommend_precision"]
@@ -58,7 +59,7 @@
       "id": "explore-missing-only",
       "scripted_turns": ["TCP/UDP랑 QUIC 얘기하며 정리하자"],
       "grade_turn": 1,
-      "fixture": "eval-1-update-crosslink",
+      "fixture": "fixtures/eval-1-update-crosslink",
       "floor": [
         {"id": "no_write", "check": "no_new_files"},
         {"id": "no_fabricated_turn", "check": "no_fabricated_user_turn"}

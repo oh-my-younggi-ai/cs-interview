@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-07-06 — grader 구현 + 지표 확정
+
+벤치가 실제로 "돌아가는" 상태가 됨. 지표는 가치 재검토 후 확정(사용자 확인).
+- **`benchmarks/grader.mjs`** — METRICS.md 스펙의 결정론적 채점기(Node, 무의존). `grade`(floor+지표) / `health`(live 위키 건강검진) 모드.
+- **지표 확정:** `crosslink_density`→참고치(게임 가능), `each_item_has_reason` 삭제(장식), `file_exists`→`page_created`(경로 완화), `content_preserved`→라인 80% 잔존(해시 대신), `token_cost`는 harness 주입.
+- **eval fixture를 repo에 포함**(`evals/fixtures/`) — 자급자족 실행 가능.
+- **첫 실측:** knowledge/ 17p — backlink 완전성 0.70, orphan 0.12 → [`wiki-health.md`](./benchmarks/cs-wiki/wiki-health.md)(append-only) 기준선. 검증: 합성 케이스 6종(정밀도 1.0/0.5, 대필 감지, floor 시뮬레이션) 통과.
+
 ## 2026-07-03 — 벤치 채점 재설계 (결정론적 3층)
 
 수치 채점을 LLM judge 없이 **스크립트 grader**로. 단일 점수 대신 **개선 궤적(지표 델타)**을 남긴다.
