@@ -50,3 +50,6 @@ timestamp: 2026-06-18T10:00:00Z
 - [엔티티 생명주기](/jpa/entity-lifecycle.md)
 - [Flush](/jpa/flush.md)
 - [트랜잭션 전파](/jpa/transaction-propagation.md)
+- [ORM](/jpa/orm.md)
+- [Spring Data JPA](/jpa/spring-data-jpa.md)
+- [N+1 문제](/jpa/n-plus-one.md)

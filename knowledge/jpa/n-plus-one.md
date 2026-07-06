@@ -56,3 +56,4 @@ for (Member m : members) {
 - [Fetch Type](/jpa/fetch-type.md)
 - [LazyInitializationException](/jpa/lazy-initialization-exception.md)
 - [영속성 컨텍스트](/jpa/persistence-context.md)
+- [B-Tree 인덱스](/database/b-tree-index.md) — N+1은 쿼리 "횟수", 인덱스는 쿼리 "하나의 비용" — 조회 성능의 두 축

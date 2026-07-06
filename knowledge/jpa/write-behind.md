@@ -45,3 +45,5 @@ commit()    → flush: INSERT A, INSERT B 전송 → DB commit
 - [영속성 컨텍스트](/jpa/persistence-context.md)
 - [Flush](/jpa/flush.md)
 - [더티 체킹](/jpa/dirty-checking.md)
+- [1차 캐시](/jpa/first-level-cache.md)
+- [JPA](/jpa/jpa.md)

@@ -46,3 +46,5 @@ Spring Data JPA는 [JPA](/jpa/jpa.md)를 한 번 더 추상화해, 인터페이�
 - [JPA](/jpa/jpa.md)
 - [영속성 컨텍스트](/jpa/persistence-context.md)
 - [더티 체킹](/jpa/dirty-checking.md)
+- [ORM](/jpa/orm.md)
+- [트랜잭션 전파](/jpa/transaction-propagation.md)

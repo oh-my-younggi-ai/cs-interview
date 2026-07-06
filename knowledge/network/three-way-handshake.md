@@ -74,4 +74,4 @@ Client                          Server
 
 # Citations
 
-[1] [RFC 793 — Transmission Control Protocol](https://www.rfc-editor.org/rfc/rfc793)
+[1] [RFC 9293 — Transmission Control Protocol (TCP)](https://www.rfc-editor.org/rfc/rfc9293) — RFC 793(1981)을 대체한 현행 TCP 명세(2022)

@@ -19,7 +19,7 @@ TCP는 연결을 수립하고 신뢰성을 보장하는 프로토콜, UDP는 연
 | 연결 | 연결지향 (handshake) | 비연결 |
 | 신뢰성 | 보장 (재전송/순서) | 미보장 |
 | 속도 | 상대적으로 느림 | 빠름 |
-| 용례 | HTTP, 파일 전송 | 스트리밍, DNS, 게임 |
+| 용례 | HTTP/1·2, 파일 전송 | 스트리밍, DNS, 게임, QUIC(HTTP/3) |
 
 # 면접 단골 질문
 
@@ -33,3 +33,4 @@ TCP는 연결을 수립하고 신뢰성을 보장하는 프로토콜, UDP는 연
 # 관련 개념
 
 - [3-way Handshake](/network/three-way-handshake.md)
+- [QUIC](/network/quic.md) — UDP 위에 신뢰성을 구현한 HTTP/3의 전송 프로토콜

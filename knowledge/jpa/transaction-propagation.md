@@ -52,3 +52,4 @@ timestamp: 2026-06-18T11:00:00Z
 - [영속성 컨텍스트](/jpa/persistence-context.md)
 - [LazyInitializationException](/jpa/lazy-initialization-exception.md)
 - [Spring Data JPA](/jpa/spring-data-jpa.md)
+- [프로세스 vs 스레드](/operating-systems/process-vs-thread.md) — 동시성·데드락·커넥션 경합의 기반 개념

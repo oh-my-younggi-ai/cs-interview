@@ -47,3 +47,6 @@ m.setName("new");                      // 필드만 변경
 - [영속성 컨텍스트](/jpa/persistence-context.md)
 - [엔티티 생명주기](/jpa/entity-lifecycle.md)
 - [Flush](/jpa/flush.md)
+- [쓰기 지연](/jpa/write-behind.md)
+- [1차 캐시](/jpa/first-level-cache.md)
+- [JPA](/jpa/jpa.md)
