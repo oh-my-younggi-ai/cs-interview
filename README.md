@@ -15,7 +15,8 @@
 cs-interview/
 ├── knowledge/    ← 지식 베이스 (공유·공개, 계속 추가)
 ├── skills/       ← 엔진 (cs-wiki, cs-interviewer)
-└── benchmarks/   ← 스킬 개선 측정 기록
+├── benchmarks/   ← 스킬 개선 측정 기록
+└── records/      ← 면접 기록·오답노트 (로컬 전용 — gitignore, 공개 안 됨)
 ```
 
 > **공개 원칙:** `knowledge/`(면접관이 낼 지식)는 누구나 쓰도록 공개한다.

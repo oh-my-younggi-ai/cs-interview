@@ -1,4 +1,4 @@
-# 면접 기록 스키마 — cs-interview-records
+# 면접 기록 스키마 — records/
 
 `{records_root}`(`~/Desktop/code/oh-my-younggi-ai/cs-interview/records`)의 구조. **지식 위키와 완전히 분리된** 저장소.
 면접 데이터·로그·숙련도를 각각 다른 파일로 둔다.

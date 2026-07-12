@@ -1,7 +1,7 @@
 {
   "skill_name": "cs-wiki",
   "schema": "v2-deterministic",
-  "grader": "../../benchmarks/grader.mjs",
+  "grader": "../../../benchmarks/grader.mjs",
   "notes": "결정론적 채점(LLM judge 없음). floor=pass/fail 회귀 가드, metrics=연속 진행 지표. 측정식은 benchmarks/cs-wiki/METRICS.md. crosslink_density는 게임 가능해 참고치(비점수). token_cost는 harness가 --tokens로 주입. 내용 품질은 점수 제외.",
   "cases": [
     {

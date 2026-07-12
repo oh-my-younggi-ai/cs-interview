@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-07-12 — 문서 정합성 점검 (유지보수)
+
+전체 감사에서 발견된 문서-현실 불일치 수정. 동작 변경 없음.
+- `evals.json` 의 `grader` 상대경로 오타 수정 (`../../` → `../../../`).
+- knowledge index 설명 동기화 (b-tree-index — 페이지 description 갱신분 미반영 drift).
+- `records-format.md` 제목의 옛 폴더명(`cs-interview-records`) → `records/`.
+- README 구조 트리에 `records/`(로컬 전용) 표기.
+- grader 사각지대 발견: index 설명 drift 미탐지 → `index_desc_sync` floor 후보로 iter-02 기록에 예약.
+
 ## 2026-07-06 — iter-02 harness 실측 완료
 
 병렬 서브에이전트 5개로 eval 전 케이스 실행 → grader 결정론 채점. **floor 16/16 green,

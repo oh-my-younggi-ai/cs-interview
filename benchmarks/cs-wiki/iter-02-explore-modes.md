@@ -54,6 +54,8 @@ iter-01과 동일하므로 해당 케이스의 스킬 행동은 동등하다.
    내도록 step-explore에 명시 + grader는 그 블록만 추출 → explore 정밀도 측정 정상화. (iter-03)
 2. baseline(no-skill) 재실행으로 token_cost ratio 복원 — 필요성 낮으면 보류.
 3. lint 시드 난이도 상향(미묘한 모순)으로 recall 헤드룸 확보 — 현재 3/3 포화.
+4. **`index_desc_sync` floor 검사 후보** — 2026-07-12 감사에서 페이지 description 갱신이 index 에
+   반영 안 되는 drift 를 grader 가 못 잡는 사각지대 발견 (`index_links_page` 는 링크 존재만 확인).
 
 ## 새 eval — 변별 목표
 

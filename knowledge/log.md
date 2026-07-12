@@ -1,5 +1,8 @@
 # CS Wiki 변경 로그
 
+## 2026-07-12
+* **점검**: index 설명 동기화 — [B-Tree 인덱스](/database/b-tree-index.md) 페이지 description 갱신분이 루트/database index에 반영 안 된 drift 수정.
+
 ## 2026-07-06
 * **점검**: 전체 lint(17페이지) — 모순 0건, 고아 2건, 단방향 역링크 18쌍, 낡은 인용 2건, 미완성 1건 발견 → 승인 후 수정.
 * **갱신**: [B-Tree 인덱스](/database/b-tree-index.md) 핵심 개념/함정/관련 개념 완성(시드 수준 → 정식 페이지).
