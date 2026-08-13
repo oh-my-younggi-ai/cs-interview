@@ -1,5 +1,10 @@
 # CS Wiki 변경 로그
 
+## 2026-08-13
+* **갱신**: 루트 인덱스를 분야 링크 전용 카탈로그로 전환하고 운영체제, 네트워크, 데이터베이스, JPA에 한국어와 영어를 병기한 큰 토픽 로드맵을 추가. 기존 개념 링크를 대응하는 큰 토픽 아래로 이동했으며 개념 파일과 경로는 변경하지 않음.
+* **갱신**: 신규 12개 대주제에 한국어와 영어를 병기하고, 각 주제의 학습 범위를 큰 토픽 헤딩으로 고정. 개념 페이지와 하위 디렉터리는 추가하지 않음.
+* **정리**: Computer Science, Data Structure, Algorithm, Programming Language, Design Pattern, Software Engineering, Web, Security, Distributed System, System Design, AI, Harness 대주제 인덱스 신규 구성. 세부 개념 페이지는 추가하지 않음.
+
 ## 2026-07-12
 * **점검**: index 설명 동기화 — [B-Tree 인덱스](/database/b-tree-index.md) 페이지 description 갱신분이 루트/database index에 반영 안 된 drift 수정.
 

@@ -63,6 +63,15 @@ function mdLinks(text) {
 
 const base = (p) => path.basename(p, '.md').toLowerCase();
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '');
+const occurrences = (text, value) => text.split(value).length - 1;
+
+function h2Sections(text) {
+  const headings = [...text.matchAll(/^##\s+(.+)$/gm)];
+  return headings.map((heading, index) => ({
+    heading: heading[1].trim(),
+    body: text.slice(heading.index + heading[0].length, headings[index + 1]?.index ?? text.length),
+  }));
+}
 
 /** 위키의 개념 집합: concept id·slug·frontmatter title (정규화). */
 function conceptNames(root) {
@@ -154,6 +163,23 @@ function makeCheckers(ctx) {
         .filter((p) => path.basename(p).toLowerCase() === 'index.md')
         .some((p) => read(ctx.result, p).includes(`${slug}.md`));
       return { pass: hit, detail: `${slug}.md in index` };
+    },
+    index_link_under_heading(a) {
+      if (!ctx.createdPage) throw new Error('page_created 검사가 선행돼야 함');
+      const category = path.dirname(ctx.createdPage);
+      const indexRel = path.join(category, 'index.md');
+      const indexText = tryRead(ctx.result, indexRel) ?? '';
+      const target = `/${ctx.createdPage.split(path.sep).join('/')}`;
+      const section = h2Sections(indexText)
+        .find((candidate) => candidate.heading === a.heading
+          || candidate.heading.startsWith(`${a.heading} (`));
+      const total = occurrences(indexText, `](${target})`);
+      const within = section ? occurrences(section.body, `](${target})`) : 0;
+      const pass = total === 1 && within === 1;
+      return {
+        pass,
+        detail: `${target} total=${total}, heading=${a.heading}, within=${within}`,
+      };
     },
     log_grew() {
       const after = tryRead(ctx.result, 'log.md');

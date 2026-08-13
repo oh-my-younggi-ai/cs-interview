@@ -2,17 +2,17 @@
   "skill_name": "cs-wiki",
   "schema": "v2-deterministic",
   "grader": "../../../benchmarks/grader.mjs",
-  "notes": "결정론적 채점(LLM judge 없음). floor=pass/fail 회귀 가드, metrics=연속 진행 지표. 측정식은 benchmarks/cs-wiki/METRICS.md. crosslink_density는 게임 가능해 참고치(비점수). token_cost는 harness가 --tokens로 주입. 내용 품질은 점수 제외.",
+  "notes": "결정론적 채점(LLM judge 없음). floor=pass/fail 회귀 가드, metrics=연속 진행 지표. 측정식은 benchmarks/cs-wiki/METRICS.md. 큰 토픽 아래 인덱스 배치는 산출물 구조로 검사한다. crosslink_density는 게임 가능해 참고치(비점수). token_cost는 harness가 --tokens로 주입. 내용 품질은 점수 제외.",
   "cases": [
     {
       "id": "new-concept",
       "prompt": "프로세스랑 스레드 차이 정리해줘",
-      "fixture": "empty",
+      "fixture": "fixtures/eval-0-topic-roadmap",
       "floor": [
         {"id": "page_created", "check": "page_created", "slug": "process-vs-thread", "aliases": ["process-thread", "process-and-thread"]},
         {"id": "frontmatter_valid", "check": "frontmatter_has", "type_equals": "CS Concept"},
         {"id": "sections_present", "check": "headers_present", "headers": ["# 한 줄 정의", "# 핵심 개념", "# 면접 단골 질문", "# 관련 개념"]},
-        {"id": "index_updated", "check": "index_links_page"},
+        {"id": "index_updated", "check": "index_link_under_heading", "heading": "프로세스와 스레드"},
         {"id": "log_appended", "check": "log_grew"}
       ],
       "metrics": ["crosslink_density", "backlink_completeness", "orphan_ratio"]
@@ -26,7 +26,7 @@
         {"id": "link_format", "check": "links_bundle_relative"},
         {"id": "backlink_added", "check": "backlink_present", "from": "network/tcp-vs-udp", "to": "network/three-way-handshake"},
         {"id": "existing_preserved", "check": "content_preserved", "path": "network/tcp-vs-udp.md"},
-        {"id": "index_updated", "check": "index_links_page"},
+        {"id": "index_updated", "check": "index_link_under_heading", "heading": "전송 계층"},
         {"id": "log_appended", "check": "log_grew"}
       ],
       "metrics": ["crosslink_density", "backlink_completeness"]

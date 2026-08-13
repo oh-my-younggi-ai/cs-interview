@@ -1,97 +1,112 @@
-# OKF 스키마 — CS Wiki 규칙
+# OKF 스키마 - CS Wiki 규칙
 
-이 위키는 **OKF(Open Knowledge Format)** 를 따른다: YAML frontmatter를 가진 마크다운 파일들의
-디렉터리. 각 개념 = 파일 1개. 모든 작업(정리/질의/점검)은 이 규칙을 지킨다.
+이 위키는 YAML frontmatter를 가진 마크다운 파일로 구성된 OKF(Open Knowledge Format)를 따른다.
+개념 하나를 파일 하나로 관리하고 모든 정리, 질의, 점검 작업에서 아래 규칙을 지킨다.
 
+## 1. 디렉터리 구조와 로드맵
 
-## 1. 디렉터리 구조와 분류
-
-번들 루트는 `{wiki_root}`. 주제별 하위 디렉터리로 개념을 묶는다.
-
-```
+```text
 cs-wiki/
-├── index.md                     # 루트 카탈로그
-├── log.md                       # 변경 이력 (시간순)
+├── index.md
+├── log.md
 ├── network/
-│   ├── index.md                 # 주제 카탈로그
-│   ├── tcp-vs-udp.md            # 개념 페이지
+│   ├── index.md
+│   ├── tcp-vs-udp.md
 │   └── three-way-handshake.md
 ├── operating-systems/
 └── ...
 ```
 
-분류는 고정이 아니다. 개념에 맞는 디렉터리가 없으면 새로 만든다. 흔한 CS 면접 주제 후보:
-`network`, `operating-systems`, `database`, `data-structure`, `algorithm`,
-`computer-architecture`, `design-pattern`, `web`, `security`, `language`, `system-design`.
+로드맵은 세 단계로 해석한다.
 
-- 파일명: `kebab-case`, 영문. (예: `tcp-vs-udp.md`)
-- concept ID: 경로에서 `.md`를 뗀 값. (`network/tcp-vs-udp.md` → `network/tcp-vs-udp`)
+1. 루트 `index.md`의 분야 링크
+2. 분야별 `index.md`의 `##` 큰 토픽
+3. 큰 토픽 아래 실제 개념 페이지를 가리키는 목록 링크
 
+- 루트와 분야별 `index.md`에 이미 있는 분야와 큰 토픽이 고정 로드맵이다.
+- 큰 토픽은 디렉터리가 아니다. `network/transport-layer/` 같은 하위 디렉터리를 만들지 않는다.
+- 개념은 하나의 주 분야와 하나의 큰 토픽에만 등록한다. 다른 영역과의 관계는 개념 페이지의 교차링크로 표현한다.
+- 개념이 여러 큰 토픽에 걸치면 핵심 학습 맥락을 기준으로 하나를 선택한다. 맥락만으로 결정할 수 없으면 사용자에게 한 번 묻는다.
+- 기존 로드맵에 맞는 위치가 없으면 분야나 큰 토픽을 자동 생성하지 않는다. 변경안을 제시하고 사용자 승인을 기다린다.
+- 파일명은 영문 `kebab-case`로 쓴다.
+- concept ID는 경로에서 `.md`를 뗀 값이다. `network/tcp-vs-udp.md`의 ID는 `network/tcp-vs-udp`다.
 
 ## 2. 개념 페이지 frontmatter
 
 ```yaml
 ---
-type: CS Concept            # REQUIRED — OKF 필수 필드
+type: CS Concept
 title: TCP vs UDP
-description: 한 문장 요약 (index.md가 이 값을 가져감)
+description: 연결지향 TCP와 비연결 UDP의 차이, 신뢰성과 속도의 트레이드오프.
 tags: [network, transport-layer]
-difficulty: medium          # easy | medium | hard (면접 난이도)
-frequency: high             # low | medium | high (면접 빈출도)
-timestamp: 2026-06-17T14:30:00Z   # 마지막 수정 시각 (ISO 8601)
+difficulty: medium
+frequency: high
+timestamp: 2026-06-17T14:30:00Z
 ---
 ```
 
-- **필수는 `type` 하나.** 값은 `CS Concept`로 통일한다.
-- `difficulty`/`frequency`는 `cs-interviewer`가 출제 우선순위를 정하는 데 쓰므로 가급적 채운다.
-- 면접 활용을 위해 본문의 `# 핵심 개념`, `# 면접 단골 질문`, `# 헷갈리는 점`, `# 관련 개념`
-  섹션을 가능한 한 채운다 — 이게 면접관의 질문·꼬리질문·평가 재료다.
+- 필수 필드는 `type`이며 값은 `CS Concept`로 통일한다.
+- `difficulty`는 `easy` | `medium` | `hard` 중 하나다.
+- `frequency`는 `low` | `medium` | `high` 중 하나다.
+- `difficulty`와 `frequency`는 `cs-interviewer`의 출제 우선순위에 사용하므로 가능한 한 채운다.
+- 본문의 `# 핵심 개념`, `# 면접 단골 질문`, `# 헷갈리는 점 / 함정`, `# 관련 개념`을 가능한 한 채운다.
 - 페이지 본문 형식은 `concept-template.md`를 따른다.
-
 
 ## 3. 교차링크
 
-- **bundle-relative 링크**(루트 `/`로 시작)를 기본으로 쓴다: `[3-way handshake](/network/three-way-handshake.md)`.
-  파일이 디렉터리 안에서 이동해도 안정적이다.
-- 본문에서 다른 개념을 언급하면 링크를 건다. **대상 페이지가 아직 없어도 링크는 건다** —
-  OKF는 깨진 링크를 "아직 안 쓴 지식"으로 허용한다.
-- 새 개념을 만들면, 그와 관련된 *기존* 페이지의 `# 관련 개념`에도 새 개념으로 향하는 역링크를 한 줄 추가한다.
+- 루트 `/`로 시작하는 bundle-relative 링크를 기본으로 쓴다.
+- 본문에서 다른 개념을 언급하면 링크를 건다.
+- 대상 페이지가 아직 없어도 본문 교차링크는 허용한다. 이는 아직 작성하지 않은 지식을 표시한다.
+- 새 개념을 만들면 관련된 기존 페이지의 `# 관련 개념`에도 새 개념으로 향하는 역링크를 추가한다.
 
+## 4. index.md
 
-## 4. index.md (내용 카탈로그)
+`index.md`에는 frontmatter를 쓰지 않는다. 루트와 분야별 인덱스의 역할을 분리한다.
 
-모든 디렉터리에 둘 수 있다. **frontmatter 없음.** 섹션별 목록.
+### 루트 index.md
 
 ```markdown
-# Network
+# CS Wiki
 
-* [TCP vs UDP](/network/tcp-vs-udp.md) - 연결지향/비연결 트레이드오프. (freq: high)
-* [3-way Handshake](/network/three-way-handshake.md) - TCP 연결 수립 절차. (freq: medium)
-
-# Operating Systems
-
-* [프로세스 vs 스레드](/operating-systems/process-vs-thread.md) - 메모리/스케줄링 단위 차이.
+* [운영체제 (Operating Systems)](/operating-systems/index.md)
+* [네트워크 (Network)](/network/index.md)
+* [데이터베이스 (Database)](/database/index.md)
 ```
 
-- 설명은 페이지 frontmatter의 `description`을 가져온다.
-- 빈출도가 있으면 `(freq: ...)`로 덧붙인다.
-- 루트 `index.md`는 주제 디렉터리 전체를, 주제 `index.md`는 그 디렉터리 페이지를 나열한다.
+- 분야별 `index.md`를 가리키는 링크만 둔다.
+- 개념 페이지 링크를 루트에 중복 등록하지 않는다.
+- 링크된 분야가 로드맵의 전체 분야 목록이다.
 
+### 분야별 index.md
 
-## 5. log.md (시간순 이력)
+```markdown
+# 네트워크 (Network)
 
-append-only. **최신이 위.** 날짜 헤딩은 ISO `YYYY-MM-DD`.
+## 전송 계층 (Transport Layer)
+
+* [TCP vs UDP](/network/tcp-vs-udp.md) - 연결지향과 비연결 전송의 트레이드오프. (freq: high)
+* [3-way Handshake](/network/three-way-handshake.md) - TCP 연결 수립 절차. (freq: medium)
+
+## 네트워크 보안 (Network Security)
+```
+
+- `#`는 분야 이름, `##`는 고정된 큰 토픽이다. `###` 이하의 분류를 추가하지 않는다.
+- `##` 제목만 있는 상태는 학습 영역만 마련되고 작성된 개념이 없는 상태다.
+- 작성 완료 여부는 실제로 존재하는 개념 페이지를 가리키는 목록 링크로만 판단한다.
+- 모든 개념 링크는 대응하는 `##` 아래에 두고 분야별 인덱스 전체에서 정확히 한 번만 등록한다.
+- 설명은 페이지 frontmatter의 `description`을 가져오고 빈출도가 있으면 `(freq: ...)`를 덧붙인다.
+- 큰 토픽 제목과 순서는 사용자가 승인한 로드맵이다. 승인 없이 추가, 삭제, 이름 변경, 재정렬하지 않는다.
+
+## 5. log.md
+
+변경 로그는 append-only이며 최신 날짜를 위에 둔다. 날짜 헤딩은 ISO `YYYY-MM-DD`를 사용한다.
 
 ```markdown
 # CS Wiki 변경 로그
 
 ## 2026-06-17
 * **정리**: [TCP vs UDP](/network/tcp-vs-udp.md) 신규 작성. [3-way handshake]에 역링크 추가.
-* **점검**: process-vs-thread 와 thread 페이지 모순 발견 → 사용자 확인 대기.
-
-## 2026-06-15
-* **초기화**: 번들 구조 생성.
+* **점검**: process-vs-thread와 thread 페이지 모순 발견 -> 사용자 확인 대기.
 ```
 
-- 접두 굵은 단어(`**정리**`, `**갱신**`, `**점검**`, `**초기화**`)는 관례다.
-- 일관된 형식 덕에 `grep "^## " log.md | head` 로 최근 이력을 빠르게 본다.
+접두 굵은 단어는 `정리`, `갱신`, `점검`, `초기화`를 사용한다.
