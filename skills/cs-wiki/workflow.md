@@ -54,6 +54,7 @@ communication_language: '한국어'
 - `{explore_mode}` - `discuss` | `recommend`
 - `{target_category}` - 루트 `index.md`에 등록된 분야와 분야 디렉터리
 - `{target_large_topic}` - 분야별 `index.md`에 고정된 `##` 큰 토픽
+- `{learning_checklist}` - 선택한 개념을 학습하기 위한 세션 내 핵심 항목과 `미시작` | `학습 중` | `완료` 상태. 위키 인덱스의 고정 큰 토픽과 별개이며 파일에 쓰지 않는다.
 - `{surfaced_concepts}` - 대화에서 추출한 개념 키워드
 - `{surfaced_changes}` - 각 추출 개념의 `신규` | `갱신` | `변경 없음` 분류와 근거
 - `{conventions}` - `{conventions_file}`에서 로드한 OKF 스키마와 규칙
