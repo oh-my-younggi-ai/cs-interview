@@ -18,6 +18,8 @@
 
 ## 동시성과 동기화 (Concurrency and Synchronization)
 
+* [뮤텍스와 세마포어](/operating-systems/mutex-semaphore.md) - 공유 자원의 상호 배제와 제한된 동시 접근을 제어하는 Mutex, Semaphore의 역할과 선택 기준. (freq: high)
+
 ## 교착 상태와 진행 보장 (Deadlock and Progress Guarantees)
 
 ## 인터럽트, 예외, 타이머 (Interrupts, Exceptions, and Timers)
