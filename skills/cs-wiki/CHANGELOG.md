@@ -2,6 +2,15 @@
 
 Full benchmark records: `../../benchmarks/cs-wiki/`
 
+## 2026-09-05 — 학습 대화의 답변 보류와 질문 설계
+
+- `cs-interviewer`가 아닌 `cs-wiki`의 `explore discuss`만 조정했다.
+- 진단 질문을 `{pending_diagnostic_question}`으로 보관한다. 학습자가 의도·용어·조건을 물으면 그
+  질문에만 답하고, 모범 답안이나 새 힌트를 누설하지 않은 채 원래 질문에 답할 기회를 유지한다.
+- 진단 질문은 한 줄 제한 없이 과제·맥락·범위가 드러나게 쓰되, 독립 과제를 한 질문에 묶지 않는다.
+- 학습 체크리스트의 `3개에서 7개` 상한을 없앴다. 난이도와 선수 지식에 맞춰 2개 이상으로 정하며,
+  복합 주제는 7개를 초과할 수 있다.
+
 ## iter-02 · 2026-07-03 — 대화 탐색 · 추천 모드
 - ingest 진입을 3모드로 확장: **직접** / **대화 탐색(discuss)** / **추천(recommend)**
 - 신규 `step-explore.md` + `step-01-route` 분기 + workflow INVARIANT(대화 대필 금지 / 위키에 없는 것만 정리 / 추천은 갭에서)
