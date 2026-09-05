@@ -18,6 +18,7 @@
 
 ## 동시성과 동기화 (Concurrency and Synchronization)
 
+* [Race Condition과 임계 구역](/operating-systems/race-condition.md) - 여러 실행 흐름이 공유 가변 상태를 동기화 없이 접근해 실행 순서에 따라 결과가 달라지는 Race Condition과 이를 보호하는 임계 구역. (freq: high)
 * [뮤텍스와 세마포어](/operating-systems/mutex-semaphore.md) - 공유 자원의 상호 배제와 제한된 동시 접근을 제어하는 Mutex, Semaphore의 역할과 선택 기준. (freq: high)
 
 ## 교착 상태와 진행 보장 (Deadlock and Progress Guarantees)

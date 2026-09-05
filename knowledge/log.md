@@ -1,5 +1,8 @@
 # CS Wiki 변경 로그
 
+## 2026-09-05
+* **정리**: [Race Condition과 임계 구역](/operating-systems/race-condition.md) 신규 작성. 큰 토픽: 동시성과 동기화 (Concurrency and Synchronization). 공유 가변 상태, 읽기-수정-쓰기의 비원자성, 갱신 유실, Mutex와 Semaphore의 역할 경계를 정리.
+
 ## 2026-09-04
 * **정리**: [뮤텍스와 세마포어](/operating-systems/mutex-semaphore.md) 신규 작성. 큰 토픽: 동시성과 동기화 (Concurrency and Synchronization). Critical Section, Race Condition, permit, Lock 순서 기반 Deadlock 예방을 정리하고 [프로세스 vs 스레드]에 역링크를 추가.
 
