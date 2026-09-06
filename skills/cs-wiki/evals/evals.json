@@ -18,6 +18,26 @@
       "metrics": ["crosslink_density", "backlink_completeness", "orphan_ratio"]
     },
     {
+      "id": "split-related-concepts",
+      "prompt": "뮤텍스와 세마포어 학습을 마쳤어. 두 개념과 차이점을 위키에 정리하는 구성을 승인할게.",
+      "fixture": "fixtures/eval-0-topic-roadmap",
+      "floor": [
+        {"id": "mutex_created", "check": "page_created", "slug": "mutex"},
+        {"id": "mutex_frontmatter", "check": "frontmatter_has", "type_equals": "CS Concept"},
+        {"id": "mutex_indexed", "check": "index_link_under_heading", "heading": "동시성과 동기화"},
+        {"id": "semaphore_created", "check": "page_created", "slug": "semaphore"},
+        {"id": "semaphore_frontmatter", "check": "frontmatter_has", "type_equals": "CS Concept"},
+        {"id": "semaphore_indexed", "check": "index_link_under_heading", "heading": "동시성과 동기화"},
+        {"id": "comparison_created", "check": "page_created", "slug": "mutex-semaphore", "aliases": ["mutex-vs-semaphore"]},
+        {"id": "comparison_frontmatter", "check": "frontmatter_has", "type_equals": "CS Concept"},
+        {"id": "comparison_indexed", "check": "index_link_under_heading", "heading": "동시성과 동기화"},
+        {"id": "comparison_links_mutex", "check": "backlink_present", "from": "operating-systems/mutex-semaphore", "to": "operating-systems/mutex"},
+        {"id": "comparison_links_semaphore", "check": "backlink_present", "from": "operating-systems/mutex-semaphore", "to": "operating-systems/semaphore"},
+        {"id": "log_appended", "check": "log_grew"}
+      ],
+      "metrics": ["crosslink_density", "backlink_completeness", "orphan_ratio"]
+    },
+    {
       "id": "update-crosslink",
       "prompt": "3-way handshake 정리해줘",
       "fixture": "fixtures/eval-1-update-crosslink",

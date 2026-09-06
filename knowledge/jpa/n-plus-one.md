@@ -15,7 +15,7 @@ N+1 문제는 엔티티를 조회하는 쿼리 1번 때문에, 그 결과 N건 �
 # 핵심 개념
 
 - 원인: 연관 엔티티를 [지연 로딩(LAZY)](/jpa/fetch-type.md)으로 두고 루프에서 하나씩 접근하거나, [즉시 로딩(EAGER)](/jpa/fetch-type.md)이 각 건마다 개별 조회를 일으킬 때.
-- [즉시 로딩이든 지연 로딩이든](/jpa/fetch-type.md) 둘 다 N+1이 발생할 수 있다 — fetch 타입을 바꾸는 것만으로는 해결되지 않는다.
+- [즉시 로딩이든 지연 로딩이든](/jpa/fetch-type.md) 둘 다 N+1이 발생할 수 있다. fetch 타입을 바꾸는 것만으로는 해결되지 않는다.
 
 ```java
 // Member 10명 조회 → 쿼리 1번
@@ -41,7 +41,7 @@ for (Member m : members) {
   - 포인트: 1번 조회 + 연관 N번 추가 쿼리. 지연/즉시 로딩 모두에서 발생, 연관을 건건이 조회해서.
 - Q: 어떻게 해결하나요?
   - 포인트: fetch join, `@EntityGraph`, `@BatchSize`(IN 절 묶기), DTO 프로젝션.
-- Q: 그냥 EAGER로 바꾸면 해결되나요?
+- Q: EAGER로 바꾸면 해결되나요?
   - 포인트: 아니다. EAGER도 N+1을 유발할 수 있고 예측 못한 조인을 만든다. LAZY + fetch join이 정석.
 - Q: 컬렉션 fetch join 시 주의점은?
   - 포인트: 일대다 fetch join은 결과 행이 뻥튀기(중복)됨 → `distinct`, 페이징과 함께 쓸 때 메모리 페이징 위험 → `@BatchSize` 권장.
@@ -56,4 +56,3 @@ for (Member m : members) {
 - [Fetch Type](/jpa/fetch-type.md)
 - [LazyInitializationException](/jpa/lazy-initialization-exception.md)
 - [영속성 컨텍스트](/jpa/persistence-context.md)
-- [B-Tree 인덱스](/database/b-tree-index.md) — N+1은 쿼리 "횟수", 인덱스는 쿼리 "하나의 비용" — 조회 성능의 두 축

@@ -20,9 +20,6 @@
 
 ## 전송 계층 (Transport Layer)
 
-* [TCP vs UDP](/network/tcp-vs-udp.md) - 연결지향 TCP와 비연결 UDP의 차이, 신뢰성과 속도의 트레이드오프. (freq: high)
-* [3-way Handshake](/network/three-way-handshake.md) - TCP 연결 수립의 SYN, SYN-ACK, ACK 3단계 절차. (freq: high)
-
 ## 신뢰성, 흐름 제어, 혼잡 제어 (Reliability, Flow Control, and Congestion Control)
 
 ## 애플리케이션 계층 프로토콜 (Application Layer Protocols)

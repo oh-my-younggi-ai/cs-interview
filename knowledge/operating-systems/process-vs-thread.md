@@ -83,7 +83,9 @@ timestamp: 2026-06-17T00:00:00Z
 
 - [컨텍스트 스위치](/operating-systems/context-switch.md)
 - [CPU 스케줄링](/operating-systems/cpu-scheduling.md)
+- [Race Condition](/operating-systems/race-condition.md)
+- [Mutex](/operating-systems/mutex.md)
+- [Semaphore](/operating-systems/semaphore.md)
 - [뮤텍스와 세마포어](/operating-systems/mutex-semaphore.md)
-- [Race Condition과 임계 구역](/operating-systems/race-condition.md)
 - [IPC (프로세스 간 통신)](/operating-systems/ipc.md)
 - [Copy-on-Write](/operating-systems/copy-on-write.md)

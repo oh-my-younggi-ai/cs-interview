@@ -14,8 +14,6 @@
 
 ## 인덱스와 접근 경로 (Indexes and Access Paths)
 
-* [B-Tree 인덱스](/database/b-tree-index.md) - 균형 트리로 키를 정렬 보관해 범위 및 정렬 검색을 O(log N)에 처리하는 데이터베이스 인덱스의 표준 구조. (freq: medium)
-
 ## 트랜잭션과 ACID (Transactions and ACID)
 
 ## 동시성 제어, 잠금, MVCC (Concurrency Control, Locking, and MVCC)

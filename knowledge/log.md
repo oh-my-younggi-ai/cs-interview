@@ -1,5 +1,9 @@
 # CS Wiki 변경 로그
 
+## 2026-09-06
+* **갱신**: 동시성과 동기화 지식을 [Race Condition](/operating-systems/race-condition.md), [임계 구역](/operating-systems/critical-section.md), [Mutex](/operating-systems/mutex.md), [Semaphore](/operating-systems/semaphore.md), [뮤텍스와 세마포어](/operating-systems/mutex-semaphore.md)로 분리하고 교차링크와 인덱스를 갱신.
+* **갱신**: 시험용으로 작성했던 TCP vs UDP, 3-way Handshake, B-Tree 인덱스 개념 페이지를 제거하고 관련 인덱스와 링크를 정리.
+
 ## 2026-09-05
 * **정리**: [Race Condition과 임계 구역](/operating-systems/race-condition.md) 신규 작성. 큰 토픽: 동시성과 동기화 (Concurrency and Synchronization). 공유 가변 상태, 읽기-수정-쓰기의 비원자성, 갱신 유실, Mutex와 Semaphore의 역할 경계를 정리.
 
