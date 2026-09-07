@@ -56,6 +56,7 @@ communication_language: '한국어'
 - `{explore_mode}` - `discuss` | `recommend`
 - `{target_category}` - 루트 `index.md`에 등록된 분야와 분야 디렉터리
 - `{target_large_topic}` - 분야별 `index.md`에 고정된 `##` 큰 토픽
+- `{core_terms}` - 선택한 주제를 이해하기 전에 정의를 확인해야 하는 최소 핵심 용어. 주제명과 직접적인 선수 개념에서 고르며 세부 구현 용어는 제외한다.
 - `{learning_checklist}` - 선택한 개념을 학습하기 위한 세션 내 핵심 항목과 `미시작` | `학습 중` | `완료` 상태. 위키 인덱스의 고정 큰 토픽과 별개이며 파일에 쓰지 않는다.
 - `{pending_diagnostic_question}` - 현재 `학습 중` 항목에서 사용자가 아직 답하지 않은 진단 질문. 보충 질문에는 유지하고, 실제 답변을 평가하거나 사용자가 명시적으로 건너뛸 때만 갱신한다.
 - `{surfaced_concepts}` - 대화에서 추출한 개념 키워드

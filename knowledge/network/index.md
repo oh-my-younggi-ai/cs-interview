@@ -20,6 +20,11 @@
 
 ## 전송 계층 (Transport Layer)
 
+* [Port](/network/port.md) - 전송 계층이 하나의 호스트 안에서 데이터를 올바른 소켓 endpoint로 분배하기 위해 사용하는 16비트 식별자. (freq: high)
+* [TCP](/network/tcp.md) - 연결을 설정한 뒤 순서 있는 신뢰성 바이트 스트림을 제공하는 전송 계층 프로토콜. (freq: high)
+* [UDP](/network/udp.md) - 연결 설정 없이 독립된 데이터그램을 전송하며 전달, 순서, 중복 제거를 보장하지 않는 전송 계층 프로토콜. (freq: high)
+* [TCP와 UDP](/network/tcp-vs-udp.md) - 신뢰성, 순서 보장, 지연 허용도, 데이터 경계를 기준으로 TCP와 UDP를 선택하는 비교 기준. (freq: high)
+
 ## 신뢰성, 흐름 제어, 혼잡 제어 (Reliability, Flow Control, and Congestion Control)
 
 ## 애플리케이션 계층 프로토콜 (Application Layer Protocols)

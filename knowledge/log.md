@@ -1,5 +1,8 @@
 # CS Wiki 변경 로그
 
+## 2026-09-07
+* **정리**: [Port](/network/port.md), [TCP](/network/tcp.md), [UDP](/network/udp.md), [TCP와 UDP](/network/tcp-vs-udp.md) 신규 작성. 큰 토픽: 전송 계층 (Transport Layer). 호스트 내부 역다중화, TCP의 ACK와 재전송, UDP의 비연결형 데이터그램, 실시간성과 신뢰성의 선택 기준을 분리해 정리.
+
 ## 2026-09-06
 * **갱신**: 동시성과 동기화 지식을 [Race Condition](/operating-systems/race-condition.md), [임계 구역](/operating-systems/critical-section.md), [Mutex](/operating-systems/mutex.md), [Semaphore](/operating-systems/semaphore.md), [뮤텍스와 세마포어](/operating-systems/mutex-semaphore.md)로 분리하고 교차링크와 인덱스를 갱신.
 * **갱신**: 시험용으로 작성했던 TCP vs UDP, 3-way Handshake, B-Tree 인덱스 개념 페이지를 제거하고 관련 인덱스와 링크를 정리.
